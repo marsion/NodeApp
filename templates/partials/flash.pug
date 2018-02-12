@@ -1,0 +1,6 @@
+each messages, type in flashMessages
+    - if (type == 'error') type = 'danger'
+    - if (type == 'success') type = 'success'
+    each message in messages
+        div(class="text-center alert alert-" + type)
+            b #{ message }

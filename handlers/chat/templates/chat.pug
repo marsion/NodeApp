@@ -1,0 +1,88 @@
+extends /layout-two-columns
+
+block append head
+    script(src="/socket.io/socket.io.js")
+
+block append variables
+    - var defaultPageTitle = 'Chat';
+
+block append navbar
+    li.nav-item.active-custom
+        a.nav-link(href="/chat") Chat
+    if (user && user.isAdmin())
+        li.nav-item
+            a.nav-link(href="/account") Users
+
+block prepend content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href="/") Home
+        li.breadcrumb-item.active Chat
+
+block sidebar
+
+block main
+    #generalTab
+
+block append scripts
+    script(src="http://code.jquery.com/jquery-1.11.1.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js")
+
+    script#chat-template(type="text/template").
+        <div class="chat__posts-box">
+            <ul class="chat__posts"></ul>
+            <div class="chat__posts-bottom"></div>
+        </div>
+
+        <div class="chat__presence notification"></div>
+        <form class="chat__send form-horizontal" action="">
+            <div class="row">
+                <span class="col-md-10">
+                    <input class="chat__send-input-id" type="hidden" value="">
+                    <input class="chat__send-input form-control" type="text" value="" autocomplete="off">
+                    <span class='chat__send-cancel' style='display: none;'>Cancel editing</span>
+                </span>
+                <span class="col-md-2">
+                    <button class="btn btn-success btn-block" type="submit">Send</button>
+                </span>
+            </div>
+        </form>
+        <div class="chat__typing notification"></div>
+
+    script#post-template(type="text/template").
+        <% if (typeof(_id) != "undefined") { %>
+            <div class='chat__post chat__post-<%= ownership %>' data-id='<%= _id %>'>
+        <% } else { %>
+            <div class='chat__post chat__post-<%= ownership %>' data-client-id='<%= clientId %>'>
+        <% } %>
+            <div class='row'>
+                <div class='col-md-1'>
+                    <div class='chat__post-avatar'>
+                        <% if (obj.avatarUrl) { %>
+                            <img src='<%= avatarUrl %>'>
+                        <% } else { %>
+                            <img src='/images/noavatar.gif'>
+                        <% } %>
+                    </div>
+                </div>
+                <div class='col-md-11'>
+                    <div class='chat__post-content'>
+                        <div class='chat__post-header'>
+                            <% if (ownership == 'own') { %>
+                                <span class='chat__post-actions pull-right'>
+                                    <img src='/images/edit-icon.png' class='chat__edit-icon'>
+                                    <img src='/images/delete-icon.gif' class='chat__delete-icon'>
+                                </span>
+                            <% } %>
+                            <span class='chat__post-username'><%= author.displayName %></span>
+                            <span class='chat__post-time'>at <%= createdAt %></span>
+
+                        </div>
+                        <div class='chat__post-body'><%= text %></div>
+                        <div class='chat__post-delivering'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    script(src="/js/ChatWidget.js")
+    script(src="/js/chat.js")

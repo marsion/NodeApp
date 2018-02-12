@@ -1,0 +1,14 @@
+extends /layout-two-columns
+
+block append variables
+    - var defaultPageTitle = 'Welcome to small app on Node.JS';
+
+block append navbar
+    li.nav-item
+        a.nav-link(href="/chat") Chat
+    if (user && user.isAdmin())
+        li.nav-item
+            a.nav-link(href="/account") Users
+
+block main
+    h1 Welcome #{ user.displayName }

@@ -1,0 +1,42 @@
+extends /layout
+
+block append variables
+    - var defaultPageTitle = 'All users';
+
+block append navbar
+    li.nav-item
+        a.nav-link(href="/chat") Chat
+    if (user && user.isAdmin())
+        li.nav-item.active-custom
+            a.nav-link(href="/account") Users
+
+block content
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href="/") Home
+        li.breadcrumb-item.active Users
+
+    table.table.table-striped.table-bordered.table-hover
+        thead
+            tr
+                th(width='5%') #
+                th(width='20%') Login
+                th(width='20%') Full name
+                th(width='20%') Email
+                th(width='10%') State
+                th(width='10%') City
+                th(width='5%') Gender
+                th(width='10%') Role
+
+        tbody
+            each user, index in users
+                tr
+                    td #{ index + 1 }
+                    td
+                        a(href="/account/" + user.login) #{ user.login }
+                    td #{ user.displayName }
+                    td #{ user.email }
+                    td #{ user.state }
+                    td #{ user.city }
+                    td #{ user.gender }
+                    td #{ user.role }

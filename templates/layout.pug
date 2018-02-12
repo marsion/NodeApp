@@ -1,0 +1,62 @@
+doctype html
+html(lang='en')
+    block variables
+        - var defaultTitle = 'NodeApp';
+
+    block head
+        head
+            meta(charset='utf-8')
+            meta(http-equiv='X-UA-Compatible', content='IE=edge')
+            meta(name='viewport', content='width=device-width, initial-scale=1')
+            meta(name='description', content='')
+            meta(name='author', content='')
+
+            link(href='/css/bootstrap.min.css', rel='stylesheet')
+            //link(href='/css/bootstrap-theme.min.css', rel='stylesheet')
+            link(href='/css/ie10-viewport-bug-workaround.css', rel='stylesheet')
+            link(href='/css/style.css', rel='stylesheet')
+
+            script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+            script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
+            block title
+                title= ( title || defaultPageTitle || defaultTitle )
+    body
+        .page-wrapper
+            nav.navbar.navbar-default(role="navigation")
+                .container
+                    .navbar-header
+                        a.navbar-brand(href="/")
+                            img(src="/images/logo.png", alt="NodeApp")
+                    ul.nav.navbar-nav
+                        block navbar
+
+                    ul.nav.navbar-nav.navbar-right
+                        if (user)
+                            li.dropdown
+                                a.dropdown-toggle(data-toggle="dropdown", href="#") #{user.displayName}
+                                    b.caret
+                                ul.dropdown-menu(role="menu")
+                                    li
+                                        a(href="/account/" + user.login) My account
+                                    li.divider
+                                    li
+                                        form(action="/auth/logout", method="POST")
+                                            button.btn.btn-link(type="submit", style="margin-left: 10px;") Logout
+
+                        else
+                            li
+                                a(href="/auth/login", role="button")
+                                    img(src="/images/user-icon.png")
+            
+            .container
+                #content
+                    block content
+            .page-buffer
+
+        .page-footer
+            footer#footer.panel-footer.text-center Copyright &copy; 2016 NodeApp. All rights reserved.
+
+        block scripts
+            script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+            script(src='/js/bootstrap.min.js')

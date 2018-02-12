@@ -1,0 +1,44 @@
+extends /layout
+
+block append variables
+    - var defaultPageTitle = 'Log into the system';
+
+block content
+    .row
+        .col-md-6.col-md-offset-3
+            include /partials/flash
+
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title #{ defaultPageTitle }
+
+                .panel-body
+                    p.text-center
+                        a(href="/auth/vk")
+                            img(src="/images/vkontakte.png")
+
+                        a(href="/auth/github")
+                            img(src="/images/github.png")
+
+                    br
+
+                    form.form-horizontal(action="/auth/login", method="post")
+                        .form-group
+                            label.col-md-3.control-label(for="username") Login or Email
+                            span.col-md-8
+                                input#username.form-control(type="text", name="username", required, autofocus)
+
+                        .form-group
+                            label.col-md-3.control-label(for="password") Password
+                            span.col-md-8
+                                input#password.form-control(type="password", name="password", required)
+
+                        .form-group
+                            span.col-md-offset-3.col-md-8
+                                button.btn.btn-primary.btn-block(type="submit") Login
+
+            .row
+                .col-md-6.text-right
+                    a(href="/auth/forgot-password", role="button") Forgot password
+                .col-md-5.col-md-offset-1.text-left
+                    a(href="/auth/registration", role="button") Registration

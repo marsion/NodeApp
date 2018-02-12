@@ -1,0 +1,11 @@
+extends /layout
+
+block append variables
+    - var defaultPageTitle = error.statusCode + ' ' + error.message;
+
+block content
+    .row
+        .col-md-8.col-md-offset-2
+            .alert.alert-danger
+                p.text-center
+                    h3.text-center #{ error.statusCode } #{ error.message }

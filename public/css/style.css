@@ -1,0 +1,139 @@
+.navbar-default{
+    height: 60px;
+}
+.navbar-brand {
+    padding: 0;
+    height: 40px;
+}
+.navbar-brand > img {
+    padding: 5px 15px;
+    width: auto;
+}
+
+.nav >li >a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.nav >li.active-custom >a {
+    color: #5f941d;
+    text-decoration: underline;
+}
+/*-------------------*/
+.form-group.required label.control-label:after {
+   content:"*";
+   color:red;
+   margin-left: 3px;
+}
+.form-hint {
+    text-align: left;
+    font-size: 12px;
+    color:#8c8c8c;
+}
+.form-error {
+    margin-bottom: 3px;
+}
+/*----------------*/
+.panel-heading h3 {
+    color: #555;
+}
+/*--------Layout --------*/
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.page-wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+* html .page-wrapper {
+    height: 100%;
+}
+.page-buffer {
+    height: 50px;
+}
+
+
+#content {
+    /*min-height: 500px;*/
+}
+#footer {
+    /*margin-top: 50px;*/
+    padding: 20px 0;
+    color: #929292;
+    font-size: 12px;
+}
+
+/*------------------*/
+
+
+/* ----------- ChatWidget ------------*/
+.chat__posts-box {
+    height: 500px;
+    overflow-y: scroll;
+}
+.chat__posts {
+    list-style: none;
+    padding: 0;
+}
+.chat__post {
+    padding: 5px 10px;
+    margin: 5px 10px 5px 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    color: #696969;
+}
+.chat__post-foreign {
+    border: 1px solid #f1f1f1;
+    background-color: #f7f7f7;
+}
+.chat__post-own {
+    border: 1px solid #d4fbd9;
+    background-color: #e9ffe9;
+}
+.chat__post-header {
+    margin-bottom: 5px;
+}
+.chat__post-username {
+    font-weight: bold;
+}
+.chat__post-time {
+    color: #838383;
+    font-size: 12px;
+    font-style: italic;
+}
+.chat__post-delivering {
+    font-size: 12px;
+    font-style: italic;
+    text-align: right;
+    min-height:12px;
+}
+.chat__post-actions img {
+    margin-left:5px;
+}
+.chat__presence {
+    color: #696969;
+    font-size: 13px;
+    height:15px;
+    margin: 10px;
+    text-align: center;
+}
+.chat__typing {
+    color: #8c8c8c;
+    font-size: 12px;
+    height:15px;
+    margin: 3px 10px 5px;
+}
+.chat__send-cancel {
+    vertical-align: middle;
+    color: #696969;
+    margin-left: 20px;
+}
+.chat__post-removed {
+    font-style: italic;
+    color: #838383;
+    padding: 5px 20px;
+}

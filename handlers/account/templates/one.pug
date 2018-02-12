@@ -1,0 +1,66 @@
+extends /layout
+
+block append variables
+    -var defaultPageTitle = profile.displayName;
+
+block append navbar
+    li.nav-item
+        a.nav-link(href="/chat") Chat
+    if (user && user.isAdmin())
+        li.nav-item.active-custom
+            a.nav-link(href="/account") Users
+
+block content
+    nav.breadcrumb
+        li.breadcrumb-item
+            a(href="/") Home
+        if (user && user.isAdmin())
+            li.breadcrumb-item
+                a(href="/account") Users
+        li.breadcrumb-item.active #{ profile.login }
+
+    .row
+        .col-md-7
+            p
+                a(href="/account/" + profile.login + "/posts") View all posts
+
+            table.table.table-striped.table-bordered
+                tbody
+                    tr
+                        td(width='30%') ID
+                        td #{ profile._id }
+                    tr
+                        td Login
+                        td #{ profile.login }
+                    tr
+                        td Full name
+                        td #{ profile.displayName }
+                    tr
+                        td Email
+                        td #{ profile.email }
+                    tr
+                        td State
+                        td #{ profile.state }
+                    tr
+                        td City
+                        td #{ profile.city }
+                    tr
+                        td Gender
+                        td #{ profile.gender }
+                    tr
+                        td Role
+                        td #{ profile.role }
+                    tr
+                        td Confirmed
+                        td
+                            if (profile.isConfirmed)
+                                | Yes
+                            else
+                                | No
+
+                    tr
+                        td Created at
+                        td #{ profile.createdAt }
+                    tr
+                        td Updated at
+                        td #{ profile.updatedAt }

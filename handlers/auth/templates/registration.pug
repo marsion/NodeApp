@@ -1,0 +1,129 @@
+extends /layout
+
+block append variables
+    - var defaultPageTitle = 'Create a new account';
+
+block content
+    .row
+        .col-md-8.col-md-offset-2
+            include /partials/flash
+
+            .panel.panel-default
+                .panel-heading
+                    h3.panel-title #{ defaultPageTitle }
+
+                .panel-body
+                    form.form-horizontal(action="/auth/registration", method="post")
+                        .form-group.required
+                            label.col-md-3.control-label(for="login") Login
+                            span.col-md-6
+                                if (errors && errors.login)
+                                    .form-error.text-danger #{ errors.login }
+                                if (values && values.login)
+                                    input.form-control(type="text", name="login", value=values.login, autofocus)
+                                else
+                                    input.form-control(type="text", name="login", autofocus)
+                            span.col-md-3.form-hint  [ 4-20 characters: <br>a-z, A-Z, 0-9, "-", "_"]
+
+                        .form-group.required
+                            label.col-md-3.control-label(for="name") Full name
+                            span.col-md-6
+                                if (errors && errors.name)
+                                    .form-error.text-danger #{ errors.name }
+                                if (values && values.name)
+                                    input.form-control(type="text", name="name", value=values.name)
+                                else
+                                    input.form-control(type="text", name="name")
+                            span.col-md-3.form-hint [ 4-20 characters ]
+
+                        .form-group.required
+                            label.col-md-3.control-label(for="email") Email
+                            span.col-md-6
+                                if (errors && errors.email)
+                                    .form-error.text-danger #{ errors.email }
+                                if (values && values.email)
+                                    input.form-control(type="text", name="email", value=values.email)
+                                else
+                                    input.form-control(type="text", name="email")
+                            span.col-md-3.form-hint
+
+                        .form-group.required
+                            label.col-md-3.control-label(for="password") Password
+                            span.col-md-6
+                                if (errors && errors.password)
+                                    .form-error.text-danger #{ errors.password }
+                                if (values && values.password)
+                                    input.form-control(type="password", name="password", value=values.password)
+                                else
+                                    input.form-control(type="password", name="password")
+                            span.col-md-3.form-hint [ 4-20 characters ]
+
+                        .form-group.required
+                            label.col-md-3.control-label(for="confirmPassword") Repeat Password
+                            span.col-md-6
+                                if (errors && errors.confirmPassword)
+                                    .form-error.text-danger #{ errors.confirmPassword }
+                                if (values && values.confirmPassword)
+                                    input.form-control(type="password", name="confirmPassword", value=values.confirmPassword)
+                                else
+                                    input.form-control(type="password", name="confirmPassword")
+                            span.col-md-3.form-hint
+
+                        .form-group
+                            label.col-md-3.control-label(for="gender") Gender
+                            span.col-md-6
+                                if (errors && errors.gender)
+                                    .form-error.text-danger #{ errors.gender }
+                                .row
+                                    if (!values || !values.gender || values.gender == "M")
+                                        .col-md-2
+                                            label.radio-inline
+                                                input(type="radio", name="gender", value="M", checked)
+                                                | Male
+                                        .col-md-3
+                                            label.radio-inline
+                                                input(type="radio", name="gender", value="F")
+                                                | Female
+                                    else
+                                        .col-md-2
+                                            label.radio-inline
+                                                input(type="radio", name="gender", value="M")
+                                                | Male
+                                        .col-md-3
+                                            label.radio-inline
+                                                input(type="radio", name="gender", value="F", checked)
+                                                | Female
+                            span.col-md-3.form-hint
+
+                        .form-group
+                            label.col-md-3.control-label(for="state") State
+                            span.col-md-6
+                                if (errors && errors.state)
+                                    .form-error.text-danger #{ errors.state }
+                                if (values && values.state)
+                                    input.form-control(type="text", name="state", value=values.state)
+                                else
+                                    input.form-control(type="text", name="state")
+                            span.col-md-3.form-hint [ 2-30 characters: <br>a-z, A-Z, а-я, А-Я, "-", " "]
+
+                        .form-group
+                            label.col-md-3.control-label(for="city") City
+                            span.col-md-6
+                                if (errors && errors.city)
+                                    .form-error.text-danger #{ errors.city }
+                                if (values && values.city)
+                                    input.form-control(type="text", name="city", value=values.city)
+                                else
+                                    input.form-control(type="text", name="city")
+                            span.col-md-3.form-hint [ 2-30 characters: <br>a-z, A-Z, а-я, А-Я, "-", " "]
+
+
+                        .form-group
+                            span.col-md-offset-3.col-md-6
+                                button.btn.btn-primary.btn-block(type="submit") Create
+
+            .row
+                .col-md-6.text-right
+                    a(href="/auth/forgot-password", role="button") Forgot password
+                .col-md-5.col-md-offset-1.text-left
+                    a(href="/auth/login", role="button") Login

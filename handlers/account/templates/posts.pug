@@ -1,0 +1,29 @@
+extends /layout
+
+block append variables
+    -var defaultPageTitle = 'Posts of ' + profile.displayName;
+
+block append navbar
+    li.nav-item
+        a.nav-link(href="/chat") Chat
+    if (user && user.isAdmin())
+        li.nav-item.active-custom
+            a.nav-link(href="/account") Users
+
+block content
+    nav.breadcrumb
+        li.breadcrumb-item
+            a(href="/") Home
+        if (user && user.isAdmin())
+            li.breadcrumb-item
+                a(href="/account") Users
+        li.breadcrumb-item
+            a(href="/account/" + profile.login) #{ profile.login }
+        li.breadcrumb-item.active Posts
+
+    table.table.table-striped.table-bordered
+        tbody
+            each post, index in posts
+                tr
+                    td(width='20%') #{ post.createdAt }
+                    td #{ post.text }
